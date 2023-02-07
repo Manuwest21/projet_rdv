@@ -55,7 +55,7 @@ def loggout(request):
         return redirect ('login')
     else:
         form=logout(request)
-    return render (request, "rendez_vous/logout.html", {'form':form})
+    return render (request, "rendez_vous/loggout.html", {'form':form})
 
 @login_required
 def profil_perso(request):
