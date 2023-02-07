@@ -19,11 +19,12 @@ from rendez_vous import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name="home"),
+    path('', include('user_authen.url')),
+    path('',views.home, name='home'),
     path('register/', views.register, name="register"),
-    path('login_p/',views.login_p, name="login_p"),
-    path('logout/', views.logout, name="logout"),
-    path('profil_perso/', views.profil_perso, name="profil_perso")
+    path('login/',views.login_p, name="login_p"),
+    path('loggout/', views.logout, name="logout"),
+    path('profil_perso/', views.profil_perso, name="profil_perso"),
     path('accounts/', include('django.contrib.auth.urls')),
-    path
+    
 ]

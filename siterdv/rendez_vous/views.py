@@ -11,9 +11,9 @@ from rendez_vous.models import Note
 # Create your views here.
 
 
-def home (request):
-    return render (request, 'rendez_vous/home.html')
-
+# def home (request):
+#     return render (request, 'rendez_vous/home.html')
+@login_required
 def home(request):
 	context ={
 	'notes': Note.objects.all()
@@ -42,14 +42,14 @@ def login_p(request):
         if form.is_valid():
             user=form.get_user()
             login(request, user)
-            return redirect('profil_perso')
+            return redirect('home')
     else:
         form= AuthenticationForm(request)
         
     
     return render (request, "rendez_vous/login_p.html", {'form':form})
 
-def logout(request):
+def loggout(request):
     if request.method== "POST":
         logout(request)
         return redirect ('login')
