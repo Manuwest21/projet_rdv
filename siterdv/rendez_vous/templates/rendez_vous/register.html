@@ -1,0 +1,36 @@
+{% extends "rendez_vous/base.html" %}
+{% block title %}créez votre compte{% endblock %}
+
+
+
+
+{% block content %}
+{%for message in messages%}
+<h1 style="color: green;"> {{message}}</h1>
+{% endfor%}
+<center>
+    <form method="post" action="{% url 'register' %}">     
+        {% csrf_token %}
+        {{form.username.label}}
+        {{form.username}}
+        <br> </br>
+        {{form.email.label}}
+        {{form.email}}
+        <br> </br>
+        {{form.password1.label}}
+        {{form.password1}}
+        <br> </br>
+        {{form.password2.label}}
+        {{form.password2}}
+        <br> </br>
+        {{form.birthdate.label}}
+        {{form.birthdate}}
+        <br> </br>
+        {% comment %} {{formd.username.label}}
+        {{form.username}} {% endcomment %}
+        <button type="submit" class="btn btn-success">S'enregistrer</button>
+        {{form.errors}}
+    </form>
+</center>
+{% endblock %}
+

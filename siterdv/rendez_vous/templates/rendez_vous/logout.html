@@ -1,0 +1,20 @@
+{% extends 'rendez_vous/base.html' %}
+
+
+
+
+{% comment %} {% if request.user.is_authenticated %} {% endcomment %}
+
+<form method='POST'> 
+    {%csrf_token %}
+    <p>are you sure  you wan to log out? </p>
+    {{form.as_p}}
+    <button type='submit'> yes, log out </button>
+</form>
+
+{% comment %} 
+{% else %} {% endcomment %}
+<p> you're not logged in, would you like to <a href="login"> log in </a>
+
+
+{% comment %} {% endif %} {% endcomment %}

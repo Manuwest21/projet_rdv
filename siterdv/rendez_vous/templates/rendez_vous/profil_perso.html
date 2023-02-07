@@ -1,0 +1,11 @@
+{% if request.user.is_authenticated %}
+
+
+{{user.email}}
+
+
+<button type="submit"> <a href={% url 'logout'%}>se deconnecter</a>
+
+
+{% endif %}
+
