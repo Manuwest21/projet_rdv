@@ -1,0 +1,7 @@
+<p>Nous sommes là pour vous aider.</p>
+{%block title %} ajout note {% endblock%}
+<form action="" method="post" novalidate>
+{% csrf_token %}
+{{ note_as_p }}
+<input type="submit" value="Envoyer">    # ou pr mettre bouton >>> <input type="submit" class ="save_btn"> mettre ce qu'on veut voir apparaître sur le bouton     </button>
+</form>

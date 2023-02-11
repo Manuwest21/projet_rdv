@@ -1,0 +1,20 @@
+{% extends "rendez_vous/base.html" %}
+{% comment %} {% block title %}liste rendez-vous{% endblock %}
+
+
+<p> voici la liste de mes rendez_vous du jour </p>
+
+{%for appointment in form%}
+
+    {{appointment.user}}
+    {{appointment.day}}
+    {{appointment.time}}
+    {{appointment.time_ordered}}
+{%endfor%} {% endcomment %}
+{% block content %}
+<h1>Tous les rendez-vous</h1>
+{% for appointment in appointments %}
+  <p>{{ appointment.day }} | {{ appointment.time }} | {{ appointment.time_ordered }}</p>
+{% endfor %}
+
+{%endblock%}

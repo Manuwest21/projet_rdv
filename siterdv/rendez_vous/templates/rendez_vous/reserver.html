@@ -1,0 +1,35 @@
+{% comment %} {% block content %}
+{%for message in messages%}
+<h1 style="color: green;"> {{message}}</h1>
+{% endfor%} {% endcomment %}
+{% comment %} <center>
+    <form method="post" action="{% url 'register' %}">     
+        {% csrf_token %}
+        {{form.user.label}}
+        {{form.user}}
+        <br> </br>
+        {{form.day.label}}
+        {{form.day}}
+        <br> </br>
+        {{form.time_ordered.label}}
+        {{form.time_ordered}}
+        <br> </br>
+        {{form.time.label}}
+        {{form.time}}
+        <br> </br>
+        {% comment %} {{form.birthdate.label}}
+        {{form.birthdate}}
+        <br> </br> {% endcomment %}
+        {% comment %} {{formd.username.label}}
+        {{form.username}} {% endcomment %}
+        {% comment %} <button type="submit" class="btn btn-success">S'enregistrer</button>
+        {{form.errors}}
+    </form>
+{% comment %} </center>
+{% endblock %} {% endcomment %} 
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Enregistrer">
+  </form>
+  

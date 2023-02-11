@@ -50,11 +50,20 @@
                 <a class="nav-link" href="#">{{user}},</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="{% url 'loggout' %}">Déconnexion</a>
+                <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'reserver' %}">réserver</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'all_rdv' %}">mes rendez-vous</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'add_note' %}">ajouter une note</a>
               </li>
               {% else %}
               <li class="nav-item active">
-                <a class="nav-link" href="{% url 'login_p' %}">Connexion</a>
+                <a class="nav-link" href="{% url 'home' %}">Connexion</a>
               </li>
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'register' %}">Inscription</a>
