@@ -1,0 +1,14 @@
+{% extends "rendez_vous/base.html" %}
+
+{% block content %}
+<h1>Mes rendez-vous</h1>
+
+<ul>
+{% for appointment in appointments %}
+
+    <li>{{ appointment.day }} | {{ appointment.time }} | {{ appointment.time_ordered }} | {{appointment.user}}
+        {% comment %} <a href="{% url 'add_note' appointment.user.id %}">Modifier une note ce cet utilisateur</a> {% endcomment %}
+    </li>
+{% endfor %}
+</ul>
+{%endblock%}

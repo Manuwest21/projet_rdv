@@ -36,6 +36,9 @@ class Appointment(models.Model):
 
 
 class Note(models.Model):
+    user = models.ForeignKey(User,
+        on_delete=models.CASCADE,
+        null=True)
     title = models.CharField(max_length=100)
     content = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)

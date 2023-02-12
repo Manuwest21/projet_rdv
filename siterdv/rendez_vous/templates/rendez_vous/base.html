@@ -56,10 +56,13 @@
                 <a class="nav-link" href="{% url 'reserver' %}">réserver</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="{% url 'all_rdv' %}">mes rendez-vous</a>
+                <a class="nav-link" href="{% url 'mes_rdv' %}">mes rendez-vous</a>
               </li>
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'add_note' %}">ajouter une note</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'list_all_rdv' %}">tous les rdv des users</a>
               </li>
               {% else %}
               <li class="nav-item active">

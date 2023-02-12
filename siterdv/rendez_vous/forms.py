@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Appointment
+from .models import Appointment, Note
 from django.forms import ModelForm
 
 class RegisterForm(UserCreationForm):
@@ -18,6 +18,15 @@ class Rendez(ModelForm):
    class Meta:
         model = Appointment
         fields = [ "day", "time_ordered", "time"]
+        
+        
+        
+        
+class Formu_note(ModelForm):
+   
+   class Meta:
+        model = Note
+        fields = [ "title", "content"]
         
 class LoginForm(AuthenticationForm):
     username= forms.CharField 

@@ -5,12 +5,12 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from rendez_vous.forms import RegisterForm,Rendez
+from rendez_vous.forms import RegisterForm,Rendez, Formu_note
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from rendez_vous.models import Note
 from datetime import datetime, timedelta
 from django.views.generic import View
-from.models import Appointment
+from.models import Appointment, User
 
 
 def home (request):
@@ -105,13 +105,13 @@ def rdv(request):
         if form.is_valid():
             appointment=form.save(commit=False)
             appointment.user = request.user
-            print("Appointment object before saving:", appointment)
+           # print("Appointment object before saving:", appointment)
             appointment.save()
-            print("Appointment object after saving:", appointment)
+            #print("Appointment object after saving:", appointment)
             messages.success(request, "votre rdv est magnifiquement créé!")
-            return redirect('login_p') 
+            return redirect('home')                                    #('confirmation_rdv', appointment.id) 
         else:
-            print("Form is not valid, errors:", form.errors)
+            print("Le formulaire est mal rempli, il y a des erreurs:", form.errors)
     else:
         appointment = Rendez()
         print("Rendez object created:", appointment)
@@ -119,13 +119,50 @@ def rdv(request):
     return render(request, 'rendez_vous/reserver.html', {'form': appointment})
 
 
-def all_rdv(request):
+def mes_rdv(request):
     appointments = Appointment.objects.filter(user=request.user).order_by('time_ordered')
-    return render(request, 'rendez_vous/liste_rdv.html', {'appointments': appointments})
+    return render(request, 'rendez_vous/mes_rdv.html', {'appointments': appointments})
+
+def list_all_rdv(request):
+    appointments = Appointment.objects.all()
+    return render(request, 'rendez_vous/list_all_rdv.html', {'appointments': appointments})
+
+def add_note(request, pk):
+    user = User.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = Formu_note(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.user = user
+            note.save()
+            return redirect('list_all_rdv')
+    else:
+        form = Formu_note()
+    return render(request, 'rendez_vous/note_form.html', {'form': form})
+
+
+def confirmation_rdv(request,id):  
+    appoint = Rendez.objects.get(id=id)
+    return render (request, 'rendez_vous/confirmation_rdv.html',{'appoint': appoint})
 
 
 
+# def confirmation_rdv(request):    
+#     # if request.method == 'POST':
+#     #     form = BandForm(request.POST)
+#     #     if form.is_valid():
+#     #         # créer une nouvelle « Band » et la sauvegarder dans la db
+#     #         band = form.save()
+#             # redirige vers la page de détail du groupe que nous venons de créer
+#             # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
+#             return render(request,'confirmation_rdv.html')
 
+#     else:
+#         form = BandForm()
+
+#     return render(request,
+#             'listings/band_create.html',
+#             {'form': form})
 
 # @login_required
 # def rdv(request):

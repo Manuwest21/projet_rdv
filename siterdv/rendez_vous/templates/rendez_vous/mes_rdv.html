@@ -1,4 +1,18 @@
 {% extends "rendez_vous/base.html" %}
+
+{% block content %}
+<h1>Tous les rendez-vous</h1>
+
+<ul>
+{% for appointment in appointments %}
+
+    <li>{{ appointment.day }} | {{ appointment.time }} | {{ appointment.time_ordered }} | {{appointment.user}}</li>
+{% endfor %}
+</ul>
+{%endblock%}
+
+
+
 {% comment %} {% block title %}liste rendez-vous{% endblock %}
 
 
@@ -11,10 +25,3 @@
     {{appointment.time}}
     {{appointment.time_ordered}}
 {%endfor%} {% endcomment %}
-{% block content %}
-<h1>Tous les rendez-vous</h1>
-{% for appointment in appointments %}
-  <p>{{ appointment.day }} | {{ appointment.time }} | {{ appointment.time_ordered }}</p>
-{% endfor %}
-
-{%endblock%}
