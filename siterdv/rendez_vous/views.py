@@ -127,8 +127,8 @@ def list_all_rdv(request):
     appointments = Appointment.objects.all()
     return render(request, 'rendez_vous/list_all_rdv.html', {'appointments': appointments})
 
-def add_note(request, pk):
-    user = User.objects.get(pk=pk)
+def add_note(request, id):
+    user = User.objects.get(id=id)
     if request.method == 'POST':
         form = Formu_note(request.POST)
         if form.is_valid():
@@ -138,7 +138,42 @@ def add_note(request, pk):
             return redirect('list_all_rdv')
     else:
         form = Formu_note()
-    return render(request, 'rendez_vous/note_form.html', {'form': form})
+    return render(request, 'rendez_vous/add_note.html', {'form': form})
+
+# def add_note(request, id):
+#     user = User.objects.get(id=id)
+#     if request.method == 'POST':
+#         form = Formu_note(request.POST)
+#         if form.is_valid():
+#             note = form.save(commit=False)
+#             note.user = user
+#             note.save()
+#             return redirect('list_all_rdv')
+#     else:
+#         form = Formu_note()
+#     return render(request, 'rendez_vous/add_note.html', {'form': form})
+
+# def add_note(request, user_id):
+#     user = get_object_or_404(User, id=user_id)
+#     form = Formu_note(request.POST or None)
+#     if form.is_valid():
+#         note = form.save(commit=False)
+#         note.user = user
+#         note.save()
+#         return redirect('list_all_rdv')
+#     return render(request, 'rendez_vous/add_note.html', {'form': form})
+# def add_note(request, pk):
+#     user = User.objects.get(pk=pk)
+#     if request.method == 'POST':
+#         form = Formu_note(request.POST)
+#         if form.is_valid():
+#             note = form.save(commit=False)
+#             note.user = user
+#             note.save()
+#             return redirect('list_all_rdv')
+#     else:
+#         form = Formu_note()
+#     return render(request, 'rendez_vous/add_note.html', {'form': form})
 
 
 def confirmation_rdv(request,id):  

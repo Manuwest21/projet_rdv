@@ -7,7 +7,7 @@
 {% for appointment in appointments %}
 
     <li>{{ appointment.day }} | {{ appointment.time }} | {{ appointment.time_ordered }} | {{appointment.user}}
-        {% comment %} <a href="{% url 'add_note' appointment.user.id %}">Modifier une note ce cet utilisateur</a> {% endcomment %}
+        <a href="{% url 'add_note' appointment.id %}">ajouter une note pour ce rdv</a>
     </li>
 {% endfor %}
 </ul>
