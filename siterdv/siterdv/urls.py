@@ -32,7 +32,7 @@ urlpatterns = [
     path('list_all_rdv/', views.list_all_rdv, name='list_all_rdv'),
     path('note_user', views.note_user, name='note_user'),
     path('confirmation_rdv', views.confirmation_rdv, name='confirmation_rdv'),
-    path('notes_ciblees', views.notes_ciblees,name='notes_ciblees')
+    path('notes_ciblees/<str:nom_client>', views.notes_ciblees,name='notes_ciblees')
     # path('accounts/', include('django.contrib.auth.urls')),
     # path('booking', views.booking, name='booking'),
     # path('booking-submit', views.bookingSubmit, name='bookingSubmit'),

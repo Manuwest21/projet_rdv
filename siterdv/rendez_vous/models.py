@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from siterdv import settings
 
 
-utilisateurs = User.objects.values_list('id', 'username')
+utilisateurs = User.objects.values_list('username', 'username')
 # Utilisateur = settings.AUTH_USER_MODEL
 
 TIME_CHOICES = (

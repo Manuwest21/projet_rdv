@@ -14,7 +14,7 @@ from django.views.generic import View
 from.models import Appointment, User
 from django.utils import timezone
 from django.contrib.admin.views.decorators import staff_member_required
-
+from django.core.exceptions import ValidationError
 
 def home (request):
     return render (request, 'rendez_vous/home.html')
@@ -83,23 +83,41 @@ def register(request):
 #         form = Rendez()
         
 #     return render(request, 'rendez_vous/reserver.html', {'form': form})
-@login_required
-def rdv(request):
-    if request.method == 'POST':
-        form = Rendez(request.POST)     
-        if form.is_valid():
-            appointment=form.save(commit=False)
-            appointment.user = request.user
-            appointment.save()
-            messages.success(request, "votre rdv est magnifiquement créé!")
-            return redirect('confirmation_rdv')#, appointment.user)                           
-        else:
-            print("Le formulaire est mal rempli, il y a des erreurs:", form.errors)
-    else:
-        appointment = Rendez()
-        print("le rendez-vous a été créé", appointment)
+# @login_required
+# def rdv(request):
+#     if request.method == 'POST':
+#         form = Rendez(request.POST)     
+#         if form.is_valid():
+#             appointment=form.save(commit=False)
+#             appointment.user = request.user
+#             form.save()
+#             # appointment.save()
+#             messages.success(request, "votre rdv est magnifiquement créé!")
+#             return redirect('confirmation_rdv')                         
+#         else:
+#             messages.error(request,"Le formulaire est mal rempli, il y a des erreurs:")
+#     else:
+#         form = Rendez()
+#         # print("le rendez-vous a été créé", appointment)
         
-    return render(request, 'rendez_vous/reserver.html', {'form': appointment})
+#     return render(request, 'rendez_vous/reserver.html', {'form': form})
+
+# @login_required
+# def rdv(request):
+#     if request.method == 'POST':
+#         form = Rendez(request.POST)     
+#         if form.is_valid():
+#             appointment=form.save(commit=False)
+#             appointment.user = request.user
+#             appointment.save()
+#             messages.success(request, "votre rdv est magnifiquement créé!")
+#             return redirect('confirmation_rdv')
+#         else:
+#             messages.error(request, "Le formulaire est mal rempli, veuillez corriger les erreurs.")
+#     else:
+#         form = Rendez()
+        
+#     return render(request, 'rendez_vous/reserver.html', {'form': form})
 
 
 def confirmation_rdv(request):  
@@ -112,51 +130,52 @@ def confirmation_rdv(request):
     return render (request, 'rendez_vous/confirmation_rdv.html',{'appoint': appoint})
 
 
-# @login_required
-# def rdv(request):
-#     today = timezone.now().date()
-#     max_day = today + datetime.timedelta(days=60)
-#     # appointment=Rendez()
-#     if request.method == 'POST':
-#         form = Rendez(request.POST)
-#         if form.is_valid():
-#             appointment=form.save(commit=False)
-#             appointment.user = request.user
-#             day = appointment.day
-#             time = appointment.time
-#             if day < today or day > max_day:
-#                 messages.error(request, "Le jour sélectionné n'est pas disponible pour une réservation, je ne propose pas de réservation de rendez-vous au delà des 60 prochains jours")
-#                 return redirect('home')
-#             if day.weekday() >= 5:
-#                 messages.error(request, "Les rendez-vous ne sont disponibles que du lundi au vendredi")
-#                 return redirect('home')
-#             existing_appointments = Appointment.objects.filter(day=day, time=time)
-#             if existing_appointments.exists():
-#                 messages.error(request, "Il existe déjà un rendez-vous à cette date et à cette heure")
-#                 return redirect('home')
-#             appointment.save()
-#             messages.success(request, "Votre rendez-vous a été créé avec succès!")
-#             return redirect('home')
-#         else:
-#             print("Le formulaire est mal rempli, il y a des erreurs:", form.errors)
-#     else:
-#         appointment = Rendez()
-#         print("Rendez object created:", appointment)
-#     return render(request, 'rendez_vous/reserver.html', {'form': appointment, 'messages': messages.get_messages(request)})
+@login_required
+def rdv(request):
+    today = timezone.now().date()
+    max_day = today + datetime.timedelta(days=60)
+    day=today
+    # appointment=Rendez()
+    if request.method == 'POST':
+        form = Rendez(request.POST)
+        if form.is_valid():
+            appointment=form.save(commit=False)
+            appointment.user = request.user
+            day = appointment.day
+            time = appointment.time
+            if day < today or day > max_day:
+                messages.error(request, "Le jour sélectionné n'est pas disponible pour une réservation, je ne propose pas de réservation de rendez-vous au delà des 60 prochains jours")
+                return redirect('resrever')
+            if day.weekday() >= 5:
+                messages.error(request, "Les rendez-vous ne sont disponibles que du lundi au vendredi")
+                return redirect('reserver')
+            existing_appointments = Appointment.objects.filter(day=day, time=time)
+            if existing_appointments.exists():
+                messages.error(request, "Il existe déjà un rendez-vous à cette date et à cette heure")
+                return redirect('home')
+            appointment.save()
+            messages.success(request, "Votre rendez-vous a été créé avec succès!")
+            return redirect('home')
+        else:
+            print("Le formulaire est mal rempli, il y a des erreurs:", form.errors)
+    else:
+        appointment = Rendez()
+        print("Rendez object created:", appointment)
+    return render(request, 'rendez_vous/reserver.html', {'form': appointment, 'messages': messages.get_messages(request),'day':day,'today':today,'max_day':max_day})
 
 def mes_rdv(request):
-    appointments = Appointment.objects.filter(user=request.user).order_by('time_ordered')
+    appointments = Appointment.objects.filter(user=request.user).order_by('day','time')
     return render(request, 'rendez_vous/mes_rdv.html', {'appointments': appointments})
 
 def list_all_rdv(request):
-    appointments = Appointment.objects.all()
+    appointments = Appointment.objects.all().order_by('day','time')
     return render(request, 'rendez_vous/list_all_rdv.html', {'appointments': appointments})
 
 def add_note(request, nom_user_rdv):
     # user_x= nom_user_rdv
     # user=rdv_x.user
-    user = User.objects.get(id=nom_user_rdv)
-
+    # user = User.objects.get(id=nom_user_rdv)
+    user=nom_user_rdv
     if request.method == 'POST':
         form = Formu_note(request.POST)
         if form.is_valid():
@@ -188,22 +207,33 @@ def add_note(request, nom_user_rdv):
 #     user = User.objects.all()
 #     return render(request, 'rendez_vous/note_user.html',{'users':user})
 
-def notes_ciblees(request, id):
-    user = User.objects.get(id=id)
-    notes=user.note
-    return render(request, 'rendez_vous/notes_ciblees.html',{'notes':notes,'user':user})
+def notes_ciblees(request, nom_client):
+    # user = User.objects.get(username=nom_client)
+    # client=user.id
+    # # notes=Note.objects.all()S
+    # notes = Note.objects.all().filter(client=nom_client)
+    users = User.objects.filter(username=nom_client)
+    if users.exists():
+        client = users.first().id
+        notes = Note.objects.all().filter(client=client)
+    else:
+        notes = []
+    return render(request, 'rendez_vous/notes_ciblees.html',{'nom_client':nom_client, 'notes':notes})
 
 def note_user(request):
-   
+    user=User.objects.all()
+    
     if request.method == 'POST':         
         form = Formu_note_users(request.POST)
         if form.is_valid():               #on vérifie si le form est valide   >>> si oui  : on le sauvegarde
+            form.save(commit=False)
+            user=form.cleaned_data['nom'] 
             form.save()
            # return redirect('home') 
     else:
         form = Formu_note_users()                 #However, if the request is not a POST request, we just create an instance of the empty UserForm. 
 
-    return render (request, "rendez_vous/note_user.html", {'form':form})
+    return render (request, "rendez_vous/note_user.html", {'form':form, 'user':user})
             
 # def add_note(request, id):
 #     user = User.objects.get(id=id)

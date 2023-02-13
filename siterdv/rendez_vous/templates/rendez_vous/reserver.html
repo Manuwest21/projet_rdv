@@ -27,9 +27,20 @@
     </form>
 {% comment %} </center>
 {% endblock %} {% endcomment %} 
-<form action:"confirmation_rdv" method="post">
+{% comment %} <form action= {% url 'confirmation_rdv'%} method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Enregistrer">
-  </form>
-  
+</form>
+   {% endcomment %}
+
+
+<form method='POST'> 
+    {%csrf_token %}
+    {{form.as_p}}
+    {% comment %} {{messages}} {% endcomment %}
+<button type='submit'> validez ce rendez_vous</button>
+
+
+{% if if day < today or day > max_day%}
+<p>le jour selectionné est trop lointain </p>

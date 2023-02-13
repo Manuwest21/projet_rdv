@@ -1,12 +1,14 @@
 {% extends "rendez_vous/base.html" %}
 
 {% block content %}
-<h1>Toutes mes notes concernant {{user.username}}</h1>
+<h1>Toutes mes notes concernant {{nom_client}}</h1>
 
-<ul>
+ <ul>
 {% for note in notes %}
-
-    <li>{{ note}}</li>
+{% comment %} {%if note.client==nom_client%} {% endcomment %}
+    <li>{{ note.title}}</li>
+    <li>{{note.content}}</li>
+    <li>{{note.creationdate}}</li>
 {% endfor %}
-</ul>
+</ul> 
 {%endblock%}
