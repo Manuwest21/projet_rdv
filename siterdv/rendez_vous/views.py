@@ -145,17 +145,17 @@ def rdv(request):
             time = appointment.time
             if day < today or day > max_day:
                 messages.error(request, "Le jour sélectionné n'est pas disponible pour une réservation, je ne propose pas de réservation de rendez-vous au delà des 60 prochains jours")
-                return redirect('resrever')
+                return redirect('reserver')
             if day.weekday() >= 5:
                 messages.error(request, "Les rendez-vous ne sont disponibles que du lundi au vendredi")
                 return redirect('reserver')
             existing_appointments = Appointment.objects.filter(day=day, time=time)
             if existing_appointments.exists():
                 messages.error(request, "Il existe déjà un rendez-vous à cette date et à cette heure")
-                return redirect('home')
+                return redirect('reserver')
             appointment.save()
             messages.success(request, "Votre rendez-vous a été créé avec succès!")
-            return redirect('home')
+            return redirect('confirmation_rdv')
         else:
             print("Le formulaire est mal rempli, il y a des erreurs:", form.errors)
     else:
