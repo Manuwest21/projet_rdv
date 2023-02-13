@@ -155,18 +155,19 @@ def list_all_rdv(request):
 def add_note(request, nom_user_rdv):
     # user_x= nom_user_rdv
     # user=rdv_x.user
-    # user = User.objects.get(id=id_rdv)
+    user = User.objects.get(id=nom_user_rdv)
+
     if request.method == 'POST':
         form = Formu_note(request.POST)
         if form.is_valid():
-            form.user=nom_user_rdv
-            note = form.save(commit=False)
-            # form.user = nom_user_rdv
-            note.save()
+            form.cleaned_data['client'] = user
+            form.save()
+            # # note.user = nom_user_rdv
+            # note.save()
             return redirect('list_all_rdv')
     else:
         form = Formu_note()
-    return render(request, 'rendez_vous/add_note.html', {'form': note})
+    return render(request, 'rendez_vous/add_note.html', {'form': form, 'client':user})
 
 # def add_note(request, nom_user_rdv):
 #     rdv_x= Appointment.objects.get(id=id)

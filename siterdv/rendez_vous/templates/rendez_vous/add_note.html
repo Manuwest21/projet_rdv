@@ -4,11 +4,27 @@
 {% csrf_token %}
 {{ user}}
 <input type="submit" value="Envoyer">    # ou pr mettre bouton >>> <input type="submit" class ="save_btn"> mettre ce qu'on veut voir apparaître sur le bouton     </button>
-</form> {% endcomment %}
-
+{% comment %} </form> {% endcomment %}
+<p>   notes pour le client {{client}}    </p>
 <form method='POST'> 
     {%csrf_token %}
     {{form.as_p}}
-    <button type='submit'> login </button>
+    <button type='submit'> valider la note sur le client </button>
 </form>
-{% comment %} {{user}} {% endcomment %}
+{% comment %} {{user}} {% endcomment %} 
+
+
+{% comment %} <form method="post" >
+    {% csrf_token %}
+    {{form.title.label}}
+    {{form.title.}}
+    <br> </br>
+    {{form.content.label}}
+    {{form.content}}
+    <br> </br>
+   
+    {% comment %} {{formd.username.label}}
+    {{form.username}} {% endcomment %}
+    {% comment %} <button type="submit" class="btn btn-success">enregister cette note</button>
+    
+</form> {% endcomment %} 

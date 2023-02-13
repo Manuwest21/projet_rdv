@@ -55,7 +55,7 @@ class Formu_note(ModelForm):
    
    class Meta:
         model = Note
-        fields = [ "title", "content"]
+        fields = [ "title", "content","client"]
         
 class LoginForm(AuthenticationForm):
     username= forms.CharField 
