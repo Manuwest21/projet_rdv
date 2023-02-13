@@ -120,7 +120,7 @@ def register(request):
 #     return render(request, 'rendez_vous/reserver.html', {'form': form})
 
 
-def confirmation_rdv(request):  
+def confirmation_rdv(request):                                                          # page d'information du confirmation de rdv, uniquement quand le rdv est sauvegardé
    # appoint = Rendez.objects.get(id=id)
     return render (request, 'rendez_vous/confirmation_rdv.html')#{'appoint': appoint})
 
@@ -132,8 +132,8 @@ def confirmation_rdv(request):
 
 @login_required
 def rdv(request):
-    today = timezone.now().date()
-    max_day = today + datetime.timedelta(days=60)
+    today = timezone.now().date()                                           #reprend la date du jour
+    max_day = today + datetime.timedelta(days=60)                           #correspond à la date du jour + une date définie à j+60 (le coach n'accepte pas de prise de rendez-vous plus de 2 mois à l'avance)
     day=today
     # appointment=Rendez()
     if request.method == 'POST':
@@ -141,45 +141,45 @@ def rdv(request):
         if form.is_valid():
             appointment=form.save(commit=False)
             appointment.user = request.user
-            day = appointment.day
+            day = appointment.day                                           #date du jour de la prise de rendez-vous par le client
             time = appointment.time
-            if day < today or day > max_day:
+            if day < today or day > max_day:                                #si la date sélectionnée est dans le passé ou supérieur à la date de +60jours
                 messages.error(request, "Le jour sélectionné n'est pas disponible pour une réservation, je ne propose pas de réservation de rendez-vous au delà des 60 prochains jours")
-                return redirect('reserver')
-            if day.weekday() >= 5:
+                return redirect('reserver')                                 #on reste sur la page avec message d'erreur qui s'affiche dessus 
+            if day.weekday() >= 5:                                          #si le jour sélectionné est un samedi ou dimanche: message d'erreur pour dire que la prise de rdv n'a lieu qu'en semaine
                 messages.error(request, "Les rendez-vous ne sont disponibles que du lundi au vendredi")
                 return redirect('reserver')
-            existing_appointments = Appointment.objects.filter(day=day, time=time)
-            if existing_appointments.exists():
+            existing_appointments = Appointment.objects.filter(day=day, time=time)    #reprend tous les champs jour et heure des "objets" appointement
+            if existing_appointments.exists():                                        #si la date et heure sélectionnée correspondent à un rdv déjà pris: message d'erreur et pas d'enregistrement rdv
                 messages.error(request, "Il existe déjà un rendez-vous à cette date et à cette heure")
                 return redirect('reserver')
-            appointment.save()
+            appointment.save()                                              #si tous les critères sont remplis: enregistrement du rdv
             messages.success(request, "Votre rendez-vous a été créé avec succès!")
-            return redirect('confirmation_rdv')
+            return redirect('confirmation_rdv')                             #renvoi vers une page de confirmation du rdv
         else:
-            print("Le formulaire est mal rempli, il y a des erreurs:", form.errors)
+            print("Le formulaire est mal rempli, il y a des erreurs:", form.errors)  #affiche erreur si formulaire mal rempli
     else:
         appointment = Rendez()
-        print("Rendez object created:", appointment)
+        print("le rendez_vous est créé:", appointment)
     return render(request, 'rendez_vous/reserver.html', {'form': appointment, 'messages': messages.get_messages(request),'day':day,'today':today,'max_day':max_day})
 
-def mes_rdv(request):
-    appointments = Appointment.objects.filter(user=request.user).order_by('day','time')
+def mes_rdv(request):                                              #reprend les "objets" rdv, en filtrant ceux correpondant à l'utilisateur connecté
+    appointments = Appointment.objects.filter(user=request.user).order_by('day','time')   #les rdv sont triés par ordre chronologique 
     return render(request, 'rendez_vous/mes_rdv.html', {'appointments': appointments})
 
-def list_all_rdv(request):
-    appointments = Appointment.objects.all().order_by('day','time')
+def list_all_rdv(request):                                         #cf 'base.html'>> seul les users définis comme 'staff', donc le coach, a accés à cet onglet de page
+    appointments = Appointment.objects.all().order_by('day','time') #répertorie tous les rdv, triés chronologiquement
     return render(request, 'rendez_vous/list_all_rdv.html', {'appointments': appointments})
 
-def add_note(request, nom_user_rdv):
-    # user_x= nom_user_rdv
+def add_note(request, nom_user_rdv):                             #donne la possibilité d'ajouter une note, fonctionalité disponible à partir de la liste de tous les rendez_vous
+    # user_x= nom_user_rdv                                       #la fonction reprend en paramétre le nom du client pour lequel on veut ajouter une note
     # user=rdv_x.user
     # user = User.objects.get(id=nom_user_rdv)
     user=nom_user_rdv
     if request.method == 'POST':
         form = Formu_note(request.POST)
         if form.is_valid():
-            form.cleaned_data['client'] = user
+            form.cleaned_data['client'] = user                   #la note est assignée au client pour lequel le coach veut ajouter une note
             form.save()
             # # note.user = nom_user_rdv
             # note.save()
@@ -207,24 +207,24 @@ def add_note(request, nom_user_rdv):
 #     user = User.objects.all()
 #     return render(request, 'rendez_vous/note_user.html',{'users':user})
 
-def notes_ciblees(request, nom_client):
-    # user = User.objects.get(username=nom_client)
+def notes_ciblees(request, nom_client):                           #page qui renvoyée à partir de "note_user", va afficher les notes déjà écrites concernant le client sélectionné
+    # user = User.objects.get(username=nom_client)                #"nom_client" correspond au nom du client pour lequel on veut accéder aux notes
     # client=user.id
     # # notes=Note.objects.all()S
     # notes = Note.objects.all().filter(client=nom_client)
-    users = User.objects.filter(username=nom_client)
+    users = User.objects.filter(username=nom_client)             #va reprendre le client qui est associé à ce nom
     if users.exists():
-        client = users.first().id
-        notes = Note.objects.all().filter(client=client)
+        client = users.first().id                                #à partir du nom du client, on reprend son id
+        notes = Note.objects.all().filter(client=client)         #on accéde aux notes uniquement correpondantantes au client sélectionné
     else:
         notes = []
-    return render(request, 'rendez_vous/notes_ciblees.html',{'nom_client':nom_client, 'notes':notes})
+    return render(request, 'rendez_vous/notes_ciblees.html',{'nom_client':nom_client, 'notes':notes})   #renvoi du nom du client et ses notes à la page html
 
 def note_user(request):
     user=User.objects.all()
     
     if request.method == 'POST':         
-        form = Formu_note_users(request.POST)
+        form = Formu_note_users(request.POST)                   #le formulaire permet de chosiir le client pour lequel on veut ajouter une note
         if form.is_valid():               #on vérifie si le form est valide   >>> si oui  : on le sauvegarde
             form.save(commit=False)
             user=form.cleaned_data['nom'] 
@@ -233,7 +233,7 @@ def note_user(request):
     else:
         form = Formu_note_users()                 #However, if the request is not a POST request, we just create an instance of the empty UserForm. 
 
-    return render (request, "rendez_vous/note_user.html", {'form':form, 'user':user})
+    return render (request, "rendez_vous/note_user.html", {'form':form, 'user':user})   #renvoi du nom client et du formulaire
             
 # def add_note(request, id):
 #     user = User.objects.get(id=id)
