@@ -27,7 +27,7 @@
     </form>
 {% comment %} </center>
 {% endblock %} {% endcomment %} 
-<form method="post">
+<form action:"confirmation_rdv" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Enregistrer">

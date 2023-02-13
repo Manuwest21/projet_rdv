@@ -1,0 +1,12 @@
+{% extends "rendez_vous/base.html" %}
+
+{% block content %}
+<h1>Toutes mes notes concernant {{user.username}}</h1>
+
+<ul>
+{% for note in notes %}
+
+    <li>{{ note}}</li>
+{% endfor %}
+</ul>
+{%endblock%}

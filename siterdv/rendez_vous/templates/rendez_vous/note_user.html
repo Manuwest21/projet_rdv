@@ -1,0 +1,46 @@
+{% extends "rendez_vous/base.html" %}
+
+{% comment %} {% block content %}
+<h1>Notes des utilisateurs</h1>
+
+<ul>
+{% for user in users %}
+
+    <li>{{ user}}
+        <a href="{% url 'notes_ciblees' %}">voir mes notes associées à ce client</a>
+    </li>
+{% endfor %}
+</ul> {% endcomment %}
+{% comment %} {%endblock%} {% endcomment %}
+
+
+<form action:"notes_ciblees" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Enregistrer">
+  </form>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Enregistrer">
+  </form> {% endcomment %}

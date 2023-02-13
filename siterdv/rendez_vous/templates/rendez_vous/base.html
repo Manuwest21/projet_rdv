@@ -58,12 +58,18 @@
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'mes_rdv' %}">mes rendez-vous</a>
               </li>
+              {% if request.user.is_staff %}
               <li class="nav-item active">
-                {% comment %} <a class="nav-link" href="{% url 'add_note' %}">ajouter une note</a> {% endcomment %}
+                <a class="nav-link" href="{% url 'note_user' %}">voir notes des utilisateurs</a>
               </li>
+              {% comment %} <li class="nav-item active">
+                <a class="nav-link" href="{% url 'add_note' %}">ajouter une note</a>
+              </li> {% endcomment %}
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'list_all_rdv' %}">tous les rdv des users</a>
               </li>
+              {% endif %}
+
               {% else %}
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'home' %}">Connexion</a>
