@@ -29,6 +29,7 @@ Fonctionnement des rendez-vous:
     
 
 Instructions de l'utilisation du site par le coach:
+
   -le coach va créer un profil "superuser" via la commande dans le terminal : <python manage.py createsuperuser> 
     >>> il va pouvoir définir un identifiant et un mot de passe qui lui seront nécessaires pour se connecter sur le site, et aura dés lors accés à ses fonctionnalités suplémentaires.
     >>> il pourra également accéder à l'interface administrateur(via <site>/admin s'il souhaite par exemple supprimer des utilisateurs ou des notes éditées
