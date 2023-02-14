@@ -1,0 +1,12 @@
+.reserver{
+    background-color: rgb(70, 170, 133);
+    display: flex;
+    justify-content:center;
+    background-image: url('img/change.jpg')
+
+}
+
+body h1{color:red;
+    display:flex;
+        justify-content:center;
+}
