@@ -66,9 +66,7 @@
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'note_user' %}">voir notes des utilisateurs</a>
               </li>
-              {% comment %} <li class="nav-item active">
-                <a class="nav-link" href="{% url 'add_note' %}">ajouter une note</a>
-              </li> {% endcomment %}
+           
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'list_all_rdv' %}">tous les rdv des users</a>
               </li>
@@ -85,7 +83,7 @@
             </ul>
           </div>
         </nav>
-        <img src="{% static 'img/aigle.jpg' %}" alt="aigle volant">
+        {% comment %} <img src="{% static 'img/aigle.jpg' %}" alt="aigle volant"> {% endcomment %}
         <main role="main" class="container">
 
           <div>

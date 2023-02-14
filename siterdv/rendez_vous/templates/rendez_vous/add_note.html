@@ -1,3 +1,7 @@
+{% extends 'rendez_vous/base.html' %}
+
+
+
 {% comment %} <p>Nous sommes là pour vous aider.</p>
 {%block title %} ajout note {% endblock%}
 <form action="" method="post" novalidate>
@@ -5,15 +9,29 @@
 {{ user}}
 <input type="submit" value="Envoyer">    # ou pr mettre bouton >>> <input type="submit" class ="save_btn"> mettre ce qu'on veut voir apparaître sur le bouton     </button>
 {% comment %} </form> {% endcomment %}
-<p>   notes pour le client {{client}}    </p>
+
+
+
+
+
+
+{% block content %}
+
+<h3>   notes pour le client {{client}}    </h3>
+</div>
 <form method='POST'> 
     {%csrf_token %}
     {{form.as_p}}
     <button type='submit'> valider la note sur le client </button>
 </form>
 {% comment %} {{user}} {% endcomment %} 
+<nav class="add_note"> 
+    <ul>
+        <li>icici</li>
+    </ul>
+</nav>
 
-
+{% endblock %}
 {% comment %} <form method="post" >
     {% csrf_token %}
     {{form.title.label}}

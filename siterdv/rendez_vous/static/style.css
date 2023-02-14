@@ -25,3 +25,19 @@ body h1{color:red;
     justify-content:center;
     
 }
+
+.h3{
+    background-color: aqua;
+    display:flex;
+    justify-content:center;
+}
+
+.add_note{
+    display:flex;
+    justify-content:flex-end;
+}
+
+.home_img {
+    background-image: url('img/eclaircie.jpg');
+    width:1000px;
+}
