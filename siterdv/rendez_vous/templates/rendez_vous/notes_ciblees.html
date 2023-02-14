@@ -3,12 +3,36 @@
 {% block content %}
 <h1>Toutes mes notes concernant {{nom_client}}</h1>
 
- <ul>
+ {% comment %} <ul>
 {% for note in notes %}
 {% comment %} {%if note.client==nom_client%} {% endcomment %}
-    <li>{{ note.title}}</li>
-    <li>{{note.content}}</li>
-    <li>{{note.creationdate}}</li>
-{% endfor %}
-</ul> 
+    {% comment %} <li>{{ note.title}}</li> {% endcomment %}
+    {% comment %} <li>{{note.content}}</li> {% endcomment %}
+   {% comment %} # <li>{{note.creationdate}}</li> {% endcomment %}
+
+
+<table width="1000" border="1">
+    <thead>
+    <tr>
+        <th>sujet de la note</th>  <th>contenu</th> 
+    </tr>
+    </thead>
+        <tbody>
+            {% for note in notes %}
+        <tr>
+        <td>{{ note.title}}</td>
+        <td>{{note.content}}</td>
+       
+        
+        {% endfor %}
+        </tbody>
+
+<a href="{% url 'home'  %}">retourner à la page d'accueil</a>
+
+
+
+
+
+
+
 {%endblock%}

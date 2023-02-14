@@ -22,9 +22,9 @@ class Appointment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         null=True)
-   
+    # day=forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
     day = models.DateField(default=datetime.now)
-    time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
+    time = models.CharField(max_length=10, choices=TIME_CHOICES, default="9h")
     time_ordered = models.DateTimeField(default=datetime.now, blank=True)
     
     def __str__(self):

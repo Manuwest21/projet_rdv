@@ -3,12 +3,70 @@
 {% block content %}
 <h1>Mes rendez-vous</h1>
 
-<ul>
+{% comment %} <ul>
 {% for appointment in appointments %}
 
     <li>{{ appointment.day }} | {{ appointment.time }} | {{ appointment.time_ordered }} | {{appointment.user}}
         <a href="{% url 'add_note' appointment.user %}">ajouter une note pour ce rdv</a>
     </li>
-{% endfor %}
-</ul>
+{% endfor %} {% endcomment %}
+
+
+<table width="1000" border="1">
+    <thead>
+    <tr>
+        <th>Jour</th>  <th>Heure</th> <th>heure_enregistrement_rdv</th> <th>client</th> <th>ajout note </th>
+    </tr>
+    </thead>
+        <tbody>
+        {% for appointment in appointments %}
+        <tr>
+        <td>{{ appointment.day }}</td>
+        <td>{{ appointment.time }}</td>
+        <td>{{ appointment.time_ordered }}</td>
+        <td>{{ appointment.user }}</td>
+        <td href="{% url 'add_note' appointment.user %}"> </td>
+        {% endfor %}
+        </tbody>
+{% comment %} 
+        <a href="{% url 'add_note' appointment.user %}">  {% endcomment %}
+
+
+
 {%endblock%}
+
+
+{% comment %} <table class="table table-sm table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">jour_de_rdv</th>
+        <th scope="col">heure</th>
+        <th scope="col">heure_enregistrement_rdv</th>
+        <th scope="col">client</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for appointment in appointments %}
+      <tr>
+        <th scope="row">1</th>
+        {% for appointment in appointments %}
+
+        <td>{{ appointment.day }} | {{ appointment.time }} | {{ appointment.time_ordered }} | {{appointment.user}}</td>
+        {% endfor %}
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        {% for appointment in appointments %}
+        <td>Jacob</td>
+        {% endfor %}
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table> {% endcomment %}

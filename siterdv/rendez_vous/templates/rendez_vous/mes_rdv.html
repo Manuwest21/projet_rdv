@@ -3,16 +3,31 @@
 {% block content %}
 <h1>Tous mes rendez-vous programmés</h1>
 
-<ul>
+{% comment %} <ul>
 {% for appointment in appointments %}
 
     <li>{{ appointment.day }} | {{ appointment.time }} | {{ appointment.time_ordered }} | {{appointment.user}}</li>
 {% endfor %}
-</ul>
-{%endblock%}
+</ul> {% endcomment %}
 
 
-
+<table width="1000" border="1">
+    <thead>
+    <tr>
+        <th>Jour</th>  <th>Heure</th> <th>heure_enregistrement_rdv</th> <th>client</th> <th>ajout note </th>
+    </tr>
+    </thead>
+        <tbody>
+        {% for appointment in appointments %}
+        <tr>
+        <td>{{ appointment.day }}</td>
+        <td>{{ appointment.time }}</td>
+        <td>{{ appointment.time_ordered }}</td>
+        <td>{{ appointment.user }}</td>
+        <td href="{% url 'add_note' appointment.user %}"> </td>
+        {% endfor %}
+        </tbody>
+        {%endblock%}
 {% comment %} {% block title %}liste rendez-vous{% endblock %}
 
 
