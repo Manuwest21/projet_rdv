@@ -16,7 +16,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <div class="collapse navbar-collapse" id="Default">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'home' %}">Accueil<span class="sr-only">(current)</span></a>
@@ -25,13 +25,13 @@
       </div>
     </nav>
 	<br>
-    <main role="main" class="container">
+    {% comment %} <main role="main" class="container">
      
 
-    </main>
+    </main> {% endcomment %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <body>
+    <div class="ppal">
         <h1>Coach en developement personnel reconnu</h1>
          <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
           <a class="navbar-brand" href="{% url 'home' %}">Page d'accueil</a>
@@ -39,10 +39,10 @@
             <span class="navbar-toggler-icon"></span>
           </button>
     
-          <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <div class="collapse navbar-collapse" id="navbarsEx">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">à mon propos<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'a_mon_propos' %}">à mon propos<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'home' %}">ma méthode de coaching<span class="sr-only">(current)</span></a>
@@ -84,14 +84,14 @@
           </div>
         </nav>
         {% comment %} <img src="{% static 'img/aigle.jpg' %}" alt="aigle volant"> {% endcomment %}
-        <main role="main" class="container">
+        {% comment %} <main role="main" class="container"> {% endcomment %}
 
-          <div>
+        <div>
             {% block content %}
             {% endblock %}
-          </div>
+        </div>
     
-        </main>
+        {% comment %} </main> {% endcomment %}
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
    

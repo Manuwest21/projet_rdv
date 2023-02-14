@@ -38,6 +38,10 @@ body h1{color:red;
 }
 
 .home_img {
-    background-image: url('img/eclaircie.jpg');
-    width:1000px;
+    background-color: brown;
+    background-image: url('img/aigle.jpg');
+    width: 100%;
+    height: 700px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
