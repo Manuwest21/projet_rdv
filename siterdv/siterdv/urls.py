@@ -19,13 +19,15 @@ from rendez_vous import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('user_authen.url')),
     path('',views.home, name='home'),
+    path('', include('user_authen.url')),
+
     path('home/',views.home, name='home'),
     path('register/', views.register, name="register"),
     path('login/',views.login_p, name="login_p"),
     path('loggout/', views.loggout, name="loggout"),
-    path('profil_perso/', views.profil_perso, name="profil_perso"),
+    path('a_mon_propos/', views.a_mon_propos, name="a_mon_propos"),
+    path('methode_coaching/', views.methode_coaching, name="methode_coaching"),
     path('add_note/<nom_user_rdv>/',views.add_note,name='add_note'),
     path('reserver/',views.rdv,name='reserver'),
     path('mes_rdv', views.mes_rdv, name='mes_rdv'),

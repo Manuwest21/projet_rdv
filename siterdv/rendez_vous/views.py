@@ -35,6 +35,11 @@ def add_note(request):
         note=Note(request.POST)
     return render (request, "rendez_vous/add_note.html", {'note':note})
 
+def a_mon_propos(request):
+    return render (request, "rendez_vous/a_mon_propos.html")
+
+def methode_coaching(request):
+    return render (request, "rendez_vous/methode_coaching.html")
 
 
 
@@ -55,69 +60,7 @@ def register(request):
 
 
 
-# @login_required
-# def rdv(request):
-#     if request.method == 'POST':
-#         form = Rendez(request.POST)     
-#         if form.is_valid():
-#             appointment=form.save(commit=False)
-#             appointment.user = request.user
-#             appointment.save()
-#             messages.success(request, "votre rdv est magnifiquement créé!")
-#             return redirect('login_p') 
-#     else:
-#         form = Rendez(initial={'user': request.user})
-#     return render(request, 'rendez_vous/reserver.html', {'form': form})
 
-# @login_required
-# def rdv(request):
-#     if request.method == 'POST':
-#         form = Rendez(request.POST)     
-#         if form.is_valid():
-#             appointment=form.save(commit=False)
-#             appointment.user = request.user
-#             appointment.save()
-#             messages.success(request, "votre rdv est magnifiquement créé!")
-#             return redirect('login_p') 
-#     else:
-#         form = Rendez()
-        
-#     return render(request, 'rendez_vous/reserver.html', {'form': form})
-# @login_required
-# def rdv(request):
-#     if request.method == 'POST':
-#         form = Rendez(request.POST)     
-#         if form.is_valid():
-#             appointment=form.save(commit=False)
-#             appointment.user = request.user
-#             form.save()
-#             # appointment.save()
-#             messages.success(request, "votre rdv est magnifiquement créé!")
-#             return redirect('confirmation_rdv')                         
-#         else:
-#             messages.error(request,"Le formulaire est mal rempli, il y a des erreurs:")
-#     else:
-#         form = Rendez()
-#         # print("le rendez-vous a été créé", appointment)
-        
-#     return render(request, 'rendez_vous/reserver.html', {'form': form})
-
-# @login_required
-# def rdv(request):
-#     if request.method == 'POST':
-#         form = Rendez(request.POST)     
-#         if form.is_valid():
-#             appointment=form.save(commit=False)
-#             appointment.user = request.user
-#             appointment.save()
-#             messages.success(request, "votre rdv est magnifiquement créé!")
-#             return redirect('confirmation_rdv')
-#         else:
-#             messages.error(request, "Le formulaire est mal rempli, veuillez corriger les erreurs.")
-#     else:
-#         form = Rendez()
-        
-#     return render(request, 'rendez_vous/reserver.html', {'form': form})
 
 
 def confirmation_rdv(request):                                                          # page d'information du confirmation de rdv, uniquement quand le rdv est sauvegardé
@@ -188,24 +131,7 @@ def add_note(request, nom_user_rdv):                             #donne la possi
         form = Formu_note()
     return render(request, 'rendez_vous/add_note.html', {'form': form, 'client':user})
 
-# def add_note(request, nom_user_rdv):
-#     rdv_x= Appointment.objects.get(id=id)
-#     user=rdv_x.user
-#     user = User.objects.get(id=id_rdv)
-#     if request.method == 'POST':
-#         form = Formu_note(request.POST)
-#         if form.is_valid():
-#             note = form.save(commit=False)
-#             note.user = user
-#             note.save()
-#             return redirect('list_all_rdv')
-#     else:
-#         form = Formu_note()
-#     return render(request, 'rendez_vous/add_note.html', {'form': form})
 
-# def note_user(request):
-#     user = User.objects.all()
-#     return render(request, 'rendez_vous/note_user.html',{'users':user})
 
 def notes_ciblees(request, nom_client):                           #page qui renvoyée à partir de "note_user", va afficher les notes déjà écrites concernant le client sélectionné
     # user = User.objects.get(username=nom_client)                #"nom_client" correspond au nom du client pour lequel on veut accéder aux notes
@@ -248,6 +174,26 @@ def note_user(request):
 #         form = Formu_note()
 #     return render(request, 'rendez_vous/add_note.html', {'form': form})
 
+
+
+# def add_note(request, nom_user_rdv):
+#     rdv_x= Appointment.objects.get(id=id)
+#     user=rdv_x.user
+#     user = User.objects.get(id=id_rdv)
+#     if request.method == 'POST':
+#         form = Formu_note(request.POST)
+#         if form.is_valid():
+#             note = form.save(commit=False)
+#             note.user = user
+#             note.save()
+#             return redirect('list_all_rdv')
+#     else:
+#         form = Formu_note()
+#     return render(request, 'rendez_vous/add_note.html', {'form': form})
+
+# def note_user(request):
+#     user = User.objects.all()
+#     return render(request, 'rendez_vous/note_user.html',{'users':user})
 # def add_note(request, user_id):
 #     user = get_object_or_404(User, id=user_id)
 #     form = Formu_note(request.POST or None)
@@ -270,7 +216,69 @@ def note_user(request):
 #         form = Formu_note()
 #     return render(request, 'rendez_vous/add_note.html', {'form': form})
 
+# @login_required
+# def rdv(request):
+#     if request.method == 'POST':
+#         form = Rendez(request.POST)     
+#         if form.is_valid():
+#             appointment=form.save(commit=False)
+#             appointment.user = request.user
+#             appointment.save()
+#             messages.success(request, "votre rdv est magnifiquement créé!")
+#             return redirect('login_p') 
+#     else:
+#         form = Rendez(initial={'user': request.user})
+#     return render(request, 'rendez_vous/reserver.html', {'form': form})
 
+# @login_required
+# def rdv(request):
+#     if request.method == 'POST':
+#         form = Rendez(request.POST)     
+#         if form.is_valid():
+#             appointment=form.save(commit=False)
+#             appointment.user = request.user
+#             appointment.save()
+#             messages.success(request, "votre rdv est magnifiquement créé!")
+#             return redirect('login_p') 
+#     else:
+#         form = Rendez()
+        
+#     return render(request, 'rendez_vous/reserver.html', {'form': form})
+# @login_required
+# def rdv(request):
+#     if request.method == 'POST':
+#         form = Rendez(request.POST)     
+#         if form.is_valid():
+#             appointment=form.save(commit=False)
+#             appointment.user = request.user
+#             form.save()
+#             # appointment.save()
+#             messages.success(request, "votre rdv est magnifiquement créé!")
+#             return redirect('confirmation_rdv')                         
+#         else:
+#             messages.error(request,"Le formulaire est mal rempli, il y a des erreurs:")
+#     else:
+#         form = Rendez()
+#         # print("le rendez-vous a été créé", appointment)
+        
+#     return render(request, 'rendez_vous/reserver.html', {'form': form})
+
+# @login_required
+# def rdv(request):
+#     if request.method == 'POST':
+#         form = Rendez(request.POST)     
+#         if form.is_valid():
+#             appointment=form.save(commit=False)
+#             appointment.user = request.user
+#             appointment.save()
+#             messages.success(request, "votre rdv est magnifiquement créé!")
+#             return redirect('confirmation_rdv')
+#         else:
+#             messages.error(request, "Le formulaire est mal rempli, veuillez corriger les erreurs.")
+#     else:
+#         form = Rendez()
+        
+#     return render(request, 'rendez_vous/reserver.html', {'form': form})
 
 
 # class LoginPageView(View):

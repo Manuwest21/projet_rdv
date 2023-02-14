@@ -7,6 +7,21 @@
 }
 
 body h1{color:red;
-    display:flex;
+        display:flex;
         justify-content:center;
+}
+
+
+
+.methode_coaching{
+    background-image: url('img/change.jpg');
+    background-color:green;
+
+
+}
+
+.img{display:flex;
+    height:100%;
+    justify-content:center;
+    
 }
