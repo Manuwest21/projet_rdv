@@ -5,21 +5,17 @@
 {% block content %}
 
        
+<h3>  Les services que je propose: </h3>
+<div class="biographie">
+    {% lorem 2 b random %}
+</div>
+   <p> 
 <div class="home_img">      
-    ap          ret
+   
     {% comment %} <img src="{% static 'img/aigle.jpg' %}" alt="aigle volant"> {% endcomment %}
 </div>           
-        
 
-
-    {% comment %} {% endfor %}
-{% else %}
-  
-{% endif %} {% endcomment %}
-{% endblock %}
-
-
-
+{%endblock%}
 {% comment %} {%if notes %}
     {% for note in notes %} {% endcomment %}
 

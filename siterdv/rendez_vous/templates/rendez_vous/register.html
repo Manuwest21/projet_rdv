@@ -5,13 +5,12 @@
 
 
 {% block content %}
-{%for message in messages%}
-<h1 style="color: green;"> {{message}}</h1>
-{% endfor%}
-<center>
-    <form method="post" action="{% url 'register' %}">    # enctype="multipart/form-data">
+{% comment %} {%for message in messages%}
+<h1 style="color: green;"> {{message}}</h1> {% endcomment %}
+
+    <form method="post" action="{% url 'register' %}">   
         {% csrf_token %}
-        {{form.username.label}}
+        {% comment %} {{form.username.label}}
         {{form.username}}
         <br> </br>
         {{form.email.label}}
@@ -26,11 +25,60 @@
         {{form.birthdate.label}}
         {{form.birthdate}}
         <br> </br>
-        {% comment %} {{formd.username.label}}
-        {{form.username}} {% endcomment %}
+        {{form.username.label}}
+        {{form.username}} 
         <button type="submit" class="btn btn-success">S'enregistrer</button>
         {{form.errors}}
+    </form> {% endcomment %}
+    
+
+<div class="register">
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        <table width="1300" border="3">
+            <thead>
+                <tr>
+                <th scope="col"></th>
+                <th scope="col"> {{form.username.label}}</th>
+                <th scope="col"> Date de naissance</th>
+                <th scope="col"> {{form.email.label}}</th>
+                <th scope="col">{{form.password1.label}}</th>
+                <th scope="col"> {{form.password2.label}}</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+            
+                <tr>
+                    <th scope="row">champs à compléter:</th>
+            
+
+                <td>{{form.username}} </td>
+                <td>{{form.birthdate}}</td>
+                <td>{{form.email}}</td>
+                <th scope="row">{{form.password1}}</th>
+                <td>{{form.password2}}</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+    <div class="indications">
+        </br>
+        <p>indications pour les champs à remplir:</p>
+        <ul>
+            <li>le mot de passe doit comporter au moins 8 caractéres</li>
+            <li>le format de date de naissance est : xx/xx/xxxx</li>
+        </ul>
+    </div>
+        </br>
+        <div class="button">
+            <button type="submit" class="btn btn-success">S'enregistrer</button>
+        </div>
+        {{form.errors}}
     </form>
-</center>
-{% endblock %}
+</br>
+<div class="photo_change">
+    {% comment %} <img src="{% static 'img/change.jpg' %}" alt="photo change"> {% endcomment %}
+</div>
+    {% endblock%} 
 

@@ -3,11 +3,19 @@
 {% block content %}
 <div class="propos">
 <h1> Voici une description de mon parcours qui m'a forgé pour vous accompagner au mieux</h1>
-<p>
-{% lorem 1 b random %}
-</p>
+    <div class="biographie">
+    <h2>ma biographie</h2>
+    </br>
+        {% lorem 2 b random %}
+    </div>
+</br>
+    <div class="formations">
+        <h3>mes formations</h3>
+        {% lorem 1 b random %}
+    </div>
 </div>
 {% endblock %}
+
 
 
 

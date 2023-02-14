@@ -45,3 +45,91 @@ body h1{color:red;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.reserver{
+    background-color: rgb(70, 170, 133);
+    display: flex;
+    justify-content:center;
+    background-image: url('img/change.jpg')
+
+}
+
+body h1{color:rgb(10, 182, 182);
+        display:flex;
+        justify-content:center;
+}
+
+
+
+.methode_coaching{
+    background-image: url('img/mer.jpg');
+    background-color:rgb(37, 105, 168); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 700px;
+
+}
+
+.img{display:flex;
+    height:100%;
+    justify-content:center;
+    
+}
+
+.biographie{
+    background-color: aqua;
+    display:flex;
+    justify-content:center;
+}
+
+.add_note{
+    display:flex;
+    justify-content:flex-end;
+}
+
+.home_img {
+    background-color: brown;
+    background-image: url('img/aigle.jpg');
+    width: 100%;
+    height: 700px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.button{display:flex;
+    justify-content:center;
+    height: 80px;
+    }
+
+.myfieldclass{
+    color:red
+}
+.form{width:250px;}
+.register {display:flex;
+    justify-content:center;
+    flex-wrap:nowrap;
+    height:150px;
+}
+.indications{display:flex;
+    justify-content:center;
+}
+
+.photo_change img{ 
+    width:100%;                               
+    object-fit:cover}
+
+.photo_change{
+    display:flex;
+                            
+        
+    justify-content:flex-end;
+    background-image: url('img/change.jpg');
+    width: 50%;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+nav ul li a {color:red}
+
+nav a{color:rgb(197, 45, 177)}
