@@ -25,7 +25,9 @@ body h1{color:red;
     justify-content:center;
     
 }
-
+.reservation
+{display:flex;
+justify-content:center;}
 .h3{
     background-color: aqua;
     display:flex;
@@ -130,6 +132,27 @@ body h1{color:rgb(10, 182, 182);
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.photo_reservation{
+    display:flex;
+                            
+        
+    justify-content:flex-end;
+    background-image: url('img/evryday.jpg');
+    width: 50%;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.confirmation
+{background-size: cover;
+background-repeat: no-repeat;
+background-position: center center;
+background-attachment: fixed;
+background: url('img/carnet.jpg') center center cover no-repeat fixed;
+}
+
 nav ul li a {color:red}
 
 nav a{color:rgb(197, 45, 177)}

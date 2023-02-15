@@ -1,3 +1,10 @@
+{% extends "rendez_vous/base.html" %}
+{% block title %}créez votre compte{% endblock %}
+
+
+
+
+{% block content %}
 {% comment %} {% block content %}
 {%for message in messages%}
 <h1 style="color: green;"> {{message}}</h1>
@@ -34,13 +41,13 @@
 </form>
    {% endcomment %}
 
-
-<form method='POST'> 
-    {%csrf_token %}
-    {{form.as_p}}
+<div class="reservation">
+    <form method='POST'> 
+        {%csrf_token %}
+        {{form.as_p}}
     {% comment %} {{messages}} {% endcomment %}
-<button type='submit'> validez ce rendez_vous</button>
-
+    <button type='submit'> validez ce rendez_vous</button>
+</div>
 
 {% if messages %}
 <ul class="messages">
@@ -49,3 +56,18 @@
     {% endfor %}
 </ul>
 {% endif %}
+
+<div class="indications">
+</br>
+<p>indications pour les rendez-vous:</p>
+<ul>
+    <li>les rendez-vous s'effectuent du lundi au vendredi</li>
+    <li>la prise de rendez-vous est faisable jusque 2 mois à l'avance</li>
+</ul>
+</div>
+
+<div class="photo_reservation">
+    {% comment %} <img src="{% static 'img/change.jpg' %}" alt="photo change"> {% endcomment %}
+</div>
+
+{%endblock%}
