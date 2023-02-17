@@ -32,6 +32,7 @@ Instructions de l'utilisation du site par le coach:
 
   -le coach va créer un profil "superuser" via la commande dans le terminal : <python manage.py createsuperuser> 
     >>> il va pouvoir définir un identifiant et un mot de passe qui lui seront nécessaires pour se connecter sur le site, et aura dés lors accés à ses fonctionnalités suplémentaires.
+    >>> s'il n'a pas l'habitude d'utiliser le terminal de commandes, il peut prendre l'utilisateur "django", mdp:django, pour accéder au site)
     >>> il pourra également accéder à l'interface administrateur(via <site>/admin s'il souhaite par exemple supprimer des utilisateurs ou des notes éditées
     >>> de plus s'il travaille avec un collégue, une fois que celui-ci s'est enregistré, il pourra (via la page admin) lui définir le statut "staff" qui lui permettra à lui aussi d'accéder aux planning de tous les rendez-vous, ajouter des notes aux clients ou les consulter. 
 
