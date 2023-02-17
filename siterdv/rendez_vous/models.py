@@ -5,7 +5,7 @@ from siterdv import settings
 
 
 utilisateurs = User.objects.values_list('username', 'username')
-# Utilisateur = settings.AUTH_USER_MODEL
+
 
 TIME_CHOICES = (
                         ("9 h", "9h"),
@@ -22,7 +22,7 @@ class Appointment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         null=True)
-    # day=forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
+    
     day = models.DateField(default=datetime.now)
     time = models.CharField(max_length=10, choices=TIME_CHOICES, default="9h")
     time_ordered = models.DateTimeField(default=datetime.now, blank=True)
@@ -40,8 +40,7 @@ class Note(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField(default='Notes client:')
     creation_date = models.DateTimeField(auto_now_add=True)
-    # author = models.ForeignKey(User, on_delete=models.CASCADE)
-    # user=models.ForeignKey(User,on_delete=models.CASCADE)
+   
 	
 class Notes_associe_user(models.Model):
     nom = models.CharField(max_length=10, choices=utilisateurs)
